@@ -447,7 +447,7 @@
     <script>
         // Verificar se há um usuário logado
         document.addEventListener('DOMContentLoaded', function () {
-            const userData = JSON.parse(localStorage.getItem('user')) || {};
+            const userData = JSON.parse(localStorage.getItem('token')) || {};
 
             if (userData.firstName) {
                 document.getElementById('user-name').textContent = `Olá, ${userData.firstName}!`;
