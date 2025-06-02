@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo Hopi Hari">
+                </div>
+                <div class="user-menu">
+                    <button class="logout-btn" onclick="window.location.href='perfil.html'">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="editarperfil">
+        <h1>Editar Perfil</h1>
+        <form id="edit-profile-form">
+            <div class="input-group">
+                <label for="firstName">Nome</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Seu nome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="lastName">Sobrenome</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Seu sobrenome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Crie uma senha" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Confirmar Senha</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme sua senha"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label for="birthDate">Data de Nascimento</label>
+                <input type="date" id="birthDate" name="birthDate" required>
+            </div>
+            <div class="input-group">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(XX) XXXXX-XXXX">
+            </div>
+
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Minha Página com Imagem</p>
+    </footer>
+
+    <script>
+        document.getElementById('edit-profile-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Verificação de senha
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+
+            // Preparar dados para envio
+            const formData = {
+                fist_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                password: password,
+                birth_date: document.getElementById('birthDate').value,
+                phone: document.getElementById('phone').value,
+            };
+
+            try {
+                const userId = localStorage.getItem('userId'); // ou pegue de onde estiver armazenado
+                const response = await fetch(`http://localhost:3000/usuarios/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Perfil atualizado com sucesso!');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    console.log('Erro da API:', data);
+                    alert(`Erro: ${data.Mensagem || data.message || JSON.stringify(data)}`);
+                }
+            } catch (error) {
+                console.log(error)
+                console.error('Erro:', error);
+                alert('Erro de conexão. Tente novamente mais tarde.');
+            }
+        });
+    </script>
+</body>
+
+</html>

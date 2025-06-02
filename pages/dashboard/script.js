@@ -1,3 +1,7 @@
+function abrirPerfil(){
+    window.location.href = '../perfil/perfil.html';
+}
+
 // Verificar se há um usuário logado
 document.addEventListener('DOMContentLoaded', function () {
     const userToken = JSON.parse(localStorage.getItem('token')) || {};
