@@ -41,17 +41,6 @@
             </div>
 
             <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Crie uma senha" required>
-            </div>
-
-            <div class="input-group">
-                <label for="confirmPassword">Confirmar Senha</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme sua senha"
-                    required>
-            </div>
-
-            <div class="input-group">
                 <label for="birthDate">Data de Nascimento</label>
                 <input type="date" id="birthDate" name="birthDate" required>
             </div>
@@ -71,22 +60,11 @@
     <script>
         document.getElementById('edit-profile-form').addEventListener('submit', async function (e) {
             e.preventDefault();
-
-            // Verificação de senha
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
-                alert('As senhas não coincidem!');
-                return;
-            }
-
             // Preparar dados para envio
             const formData = {
                 fist_name: document.getElementById('firstName').value,
                 last_name: document.getElementById('lastName').value,
                 email: document.getElementById('email').value,
-                password: password,
                 birth_date: document.getElementById('birthDate').value,
                 phone: document.getElementById('phone').value,
             };
