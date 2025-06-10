@@ -13,7 +13,7 @@
         }
         
         body {
-            background-image: url("img/mapahopihari.jpeg");
+            background-image: url("../img/mapahopihari.jpeg");
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -159,7 +159,7 @@
 <body>
     <div class="register-container">
         <div class="register-logo">
-            <img src="img/logo.png" alt="Logo Hopi Hari">
+            <img src="../img/logo.png" alt="Logo Hopi Hari">
         </div>
         <h1>Cadastre-se</h1>
         <form id="registerForm">
@@ -228,7 +228,7 @@
             };
             
             try {
-                const response = await fetch('/api/register', {
+                const response = await fetch('http://localhost:3000/usuarios/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -240,7 +240,7 @@
                 
                 if (response.ok) {
                     alert('Cadastro realizado com sucesso!');
-                    window.location.href = 'login.html';
+                    window.location.href = '../login/login.html';
                 } else {
                     alert(`Erro: ${data.message || 'Ocorreu um erro no cadastro'}`);
                 }
